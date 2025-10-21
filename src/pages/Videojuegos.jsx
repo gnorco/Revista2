@@ -82,7 +82,11 @@ const SeccionVideojuegos = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h1 className="text-4xl font-bold mb-4">{data.intro.title}</h1>
+        <h1
+          className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+        >
+          {data.intro.title}
+        </h1>
         <p className="text-gray-800 max-w-3xl mx-auto">{data.intro.text}</p>
       </motion.div>
 
@@ -97,7 +101,7 @@ const SeccionVideojuegos = () => {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
             className="p-6 rounded-xl shadow-lg bg-gradient-to-r from-indigo-400 to-indigo-200"
           >
-            <h2 className="text-2xl font-bold mb-2">{item.title}</h2>
+            <h2 className="text-2xl font-bold mb-2 text-white drop-shadow-md">{item.title}</h2>
             <img
               src={item.img}
               alt={item.title}
@@ -116,7 +120,7 @@ const SeccionVideojuegos = () => {
         transition={{ duration: 0.6 }}
         className="mb-12"
       >
-        <h2 className="text-3xl font-bold mb-4">💡 Novedades</h2>
+        <h2 className="text-3xl font-bold mb-4 text-indigo-600">💡 Novedades</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-800">
           {data.novedades.map((item, idx) => (
             <li key={idx}>{item}</li>
@@ -132,7 +136,9 @@ const SeccionVideojuegos = () => {
         transition={{ duration: 0.6 }}
         className="mb-12 p-6 bg-yellow-100 rounded-xl shadow-md"
       >
-        <h2 className="text-3xl font-bold mb-4">🌟 Más allá del entretenimiento</h2>
+        <h2 className="text-3xl font-bold mb-4 text-yellow-700">
+          🌟 Más allá del entretenimiento
+        </h2>
         <ul className="list-disc list-inside text-gray-800 space-y-2">
           {data.masAllá.map((item, idx) => (
             <li key={idx}>{item}</li>
@@ -151,7 +157,9 @@ const SeccionVideojuegos = () => {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
             className="p-6 rounded-xl shadow-lg bg-gradient-to-r from-pink-400 to-pink-200"
           >
-            <h2 className="text-2xl font-bold mb-4">{block.title}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
+              {block.title}
+            </h2>
             <ul className="list-disc list-inside text-gray-800 space-y-2">
               {block.questions.map((q, qidx) => (
                 <li key={qidx}>{q}</li>
