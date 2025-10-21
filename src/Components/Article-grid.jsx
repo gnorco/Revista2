@@ -19,7 +19,7 @@ export default function ArticleGrid() {
       category: "Entrevistas",
       title: "Entrevistas",
       excerpt: "Exploramos entrevistas exclusivas con expertos, innovadores y referentes de distintos campos, donde comparten sus experiencias, conocimientos y consejos. Una mirada única que conecta al lector con la ciencia, la tecnología y la cultura.",
-      image: "/banner-entrevista.webp",
+      image: "public/banner_entrevistas.jpg",
       link: "/Entrevista", // Página a redirigir
     },
     {
