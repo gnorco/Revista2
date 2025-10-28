@@ -42,7 +42,7 @@ export default function Header() {
               Videojuegos
             </Link>
             <Link
-              to="/videojuegos"
+              to="/entrevistas"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
             >
               Entrevistas
@@ -100,19 +100,14 @@ export default function Header() {
               >
                 Videojuegos
               </Link>
+              <Link
+                to="/entrevistas"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              >
+                Entrevistas
+              </Link>
 
-              {/* Mobile: Botón Entrevistas */}
-              <div className="relative flex flex-col items-center cursor-not-allowed group">
-                <button
-                  disabled
-                  className="text-gray-400 font-medium cursor-not-allowed bg-transparent border-none outline-none focus:outline-none focus:ring-0"
-                >
-                  Entrevistas
-                </button>
-                <span className="absolute -bottom-8 text-xs text-gray-700 bg-white px-2 py-1 rounded-md shadow-md opacity-0 transform translate-y-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 z-50">
-                  Próximamente
-                </span>
-              </div>
+
             </div>
           </div>
         )}

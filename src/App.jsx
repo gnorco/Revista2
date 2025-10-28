@@ -7,12 +7,14 @@ import Sidebar from "./Components/Sidebar";
 import Footer from "./Components/Footer";
 import ScrollToTopButton from "./Components/ScrollToTopButton";
 
+
 // Páginas
 import JuegosOlimpicos from "./pages/JuegosOlimpicos";
 import Cocina from "./pages/Cocina";
 import Videojuegos from "./pages/Videojuegos";
 import SobreLaRevista from "./pages/SobreLaRevista";
 import Galeria from "./pages/Galeria";
+import Entrevista from "./pages/Entrevista";
 
 function AppContent() {
   const location = useLocation();
@@ -77,6 +79,7 @@ function AppContent() {
                 <Route path="/cocina" element={<Cocina />} />
                 <Route path="/videojuegos" element={<Videojuegos />} />
                 <Route path="/galeria" element={<Galeria />} />
+                <Route path="/entrevistas" element={<Entrevista/>}/>
               </Routes>
             </motion.div>
           </AnimatePresence>
