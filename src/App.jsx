@@ -1,30 +1,29 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import Header from "./Components/Header";
-import HeroArticle from "./Components/Hero-article";
-import ArticleGrid from "./Components/Article-grid";
-import Sidebar from "./Components/Sidebar";
-import Footer from "./Components/Footer";
-import ScrollToTopButton from "./Components/ScrollToTopButton";
+"use client"
 
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
+import Header from "./Components/Header"
+import HeroArticle from "./Components/Hero-article"
+import ArticleGrid from "./Components/Article-grid"
+import Sidebar from "./Components/Sidebar"
+import Footer from "./Components/Footer"
+import ScrollToTopButton from "./Components/ScrollToTopButton"
 
-// Páginas
-import JuegosOlimpicos from "./pages/JuegosOlimpicos";
-import Cocina from "./pages/Cocina";
-import Videojuegos from "./pages/Videojuegos";
-import SobreLaRevista from "./pages/SobreLaRevista";
-import Galeria from "./pages/Galeria";
-import Entrevista from "./pages/Entrevista";
+import JuegosOlimpicos from "./pages/JuegosOlimpicos"
+import Cocina from "./pages/Cocina"
+import Videojuegos from "./pages/Videojuegos"
+import SobreLaRevista from "./pages/SobreLaRevista"
+import Galeria from "./pages/Galeria"
+import Entrevista from "./pages/Entrevista"
 
 function AppContent() {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const location = useLocation()
+  const isHome = location.pathname === "/"
 
   return (
-    <div className="min-h-screen bg-white w-full overflow-x-hidden">
+    <div className="min-h-screen bg-white w-full">
       <Header />
 
-      {/* Hero solo en el home */}
       <AnimatePresence mode="wait">
         {isHome && (
           <motion.div
@@ -39,10 +38,9 @@ function AppContent() {
         )}
       </AnimatePresence>
 
-      <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
+      <div className={isHome ? "w-full py-12" : "w-full py-12"}>
         {isHome ? (
-          // 🏠 HOME: contenido + sidebar animado
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
             <div className="lg:col-span-2">
               <Routes>
                 <Route path="/" element={<ArticleGrid />} />
@@ -63,7 +61,6 @@ function AppContent() {
             </AnimatePresence>
           </div>
         ) : (
-          // 📄 OTRAS PÁGINAS: contenido centrado con fade-in
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -71,7 +68,7 @@ function AppContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.4 }}
-              className="flex justify-center items-center flex-col text-center min-h-[80vh]"
+              className="w-full"
             >
               <Routes location={location} key={location.pathname}>
                 <Route path="/sobre-la-revista" element={<SobreLaRevista />} />
@@ -79,7 +76,7 @@ function AppContent() {
                 <Route path="/cocina" element={<Cocina />} />
                 <Route path="/videojuegos" element={<Videojuegos />} />
                 <Route path="/galeria" element={<Galeria />} />
-                <Route path="/entrevistas" element={<Entrevista/>}/>
+                <Route path="/entrevistas" element={<Entrevista />} />
               </Routes>
             </motion.div>
           </AnimatePresence>
@@ -89,7 +86,7 @@ function AppContent() {
       <ScrollToTopButton />
       <Footer />
     </div>
-  );
+  )
 }
 
 export default function App() {
@@ -97,5 +94,5 @@ export default function App() {
     <Router>
       <AppContent />
     </Router>
-  );
+  )
 }

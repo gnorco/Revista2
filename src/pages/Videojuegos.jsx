@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // <- Importamos useNavigate
+"use client"
+
+import { useEffect } from "react"
+import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom" // <- Importamos useNavigate
 
 const data = {
   intro: {
@@ -11,20 +13,20 @@ const data = {
     {
       title: "📜 Historia del Gaming",
       text: "Desde los primeros arcades hasta el cloud gaming, los videojuegos han evolucionado constantemente. Doom revolucionó la acción rápida y los juegos retro vuelven gracias a la nostalgia.",
-      img: "https://via.placeholder.com/400x200?text=Historia+Gaming"
+      img: "https://via.placeholder.com/400x200?text=Historia+Gaming",
     },
     {
       title: "🇦🇷 Argentina Gamer",
       text: "La escena gamer en Argentina crece cada año con eventos como EVA 2025. Los desarrolladores locales destacan en programación, diseño y narrativa, dejando huella internacional.",
-      img: "https://via.placeholder.com/400x200?text=Argentina+Gamer"
-    }
+      img: "https://via.placeholder.com/400x200?text=Argentina+Gamer",
+    },
   ],
   novedades: [
     "PlayStation 6 genera expectativa.",
     "Nuevas consolas cambian la forma de jugar.",
     "La IA promete revolucionar la industria.",
     "Cloud Gaming: jugar sin límites desde cualquier dispositivo.",
-    "Joyas ocultas: juegos que todos deberían probar."
+    "Joyas ocultas: juegos que todos deberían probar.",
   ],
   masAllá: [
     "Educación: videojuegos que enseñan idiomas, matemáticas y estrategia.",
@@ -39,8 +41,8 @@ const data = {
         "¿Qué motores usás para desarrollar (Unity, Unreal, Godot)?",
         "¿Preferís trabajar solo o en equipo?",
         "¿Probaste hacer juegos con IA o mecánicas innovadoras?",
-        "Consejos para quien quiera crear su primer juego."
-      ]
+        "Consejos para quien quiera crear su primer juego.",
+      ],
     },
     {
       title: "🕹️ Experiencia Gamer",
@@ -48,32 +50,32 @@ const data = {
         "¿Qué juegos te marcaron?",
         "¿Creés que los videojuegos son arte?",
         "¿Cómo ha cambiado tu forma de jugar?",
-        "¿Qué opinás de la gamificación en educación o trabajo?"
-      ]
-    }
-  ]
-};
+        "¿Qué opinás de la gamificación en educación o trabajo?",
+      ],
+    },
+  ],
+}
 
 const SeccionVideojuegos = () => {
-  const navigate = useNavigate(); // <- Inicializamos navigate
+  const navigate = useNavigate() // <- Inicializamos navigate
 
   useEffect(() => {
     // Scroll suave al cargar la sección
     window.scrollTo({
       top: 400, // Ajusta la altura deseada
       behavior: "smooth",
-    });
-  }, []);
+    })
+  }, [])
 
   const handleScrollAndNavigate = (path) => {
-    navigate(path); // Navegamos al Home
+    navigate(path) // Navegamos al Home
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll suave al inicio
-    }, 100);
-  };
+      window.scrollTo({ top: 0, behavior: "smooth" }) // Scroll suave al inicio
+    }, 100)
+  }
 
   return (
-    <section className="px-4 md:px-16 py-12 bg-gray-50">
+    <section className="px-6 md:px-10 py-12 bg-gray-50 w-full">
       {/* Intro */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -82,9 +84,7 @@ const SeccionVideojuegos = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h1
-          className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-        >
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           {data.intro.title}
         </h1>
         <p className="text-gray-800 max-w-3xl mx-auto">{data.intro.text}</p>
@@ -103,7 +103,7 @@ const SeccionVideojuegos = () => {
           >
             <h2 className="text-2xl font-bold mb-2 text-white drop-shadow-md">{item.title}</h2>
             <img
-              src={item.img}
+              src={item.img || "/placeholder.svg"}
               alt={item.title}
               className="w-full h-48 object-cover rounded mb-4"
             />
@@ -136,9 +136,7 @@ const SeccionVideojuegos = () => {
         transition={{ duration: 0.6 }}
         className="mb-12 p-6 bg-yellow-100 rounded-xl shadow-md"
       >
-        <h2 className="text-3xl font-bold mb-4 text-yellow-700">
-          🌟 Más allá del entretenimiento
-        </h2>
+        <h2 className="text-3xl font-bold mb-4 text-yellow-700">🌟 Más allá del entretenimiento</h2>
         <ul className="list-disc list-inside text-gray-800 space-y-2">
           {data.masAllá.map((item, idx) => (
             <li key={idx}>{item}</li>
@@ -157,9 +155,7 @@ const SeccionVideojuegos = () => {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
             className="p-6 rounded-xl shadow-lg bg-gradient-to-r from-pink-400 to-pink-200"
           >
-            <h2 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
-              {block.title}
-            </h2>
+            <h2 className="text-2xl font-bold mb-4 text-white drop-shadow-md">{block.title}</h2>
             <ul className="list-disc list-inside text-gray-800 space-y-2">
               {block.questions.map((q, qidx) => (
                 <li key={qidx}>{q}</li>
@@ -179,7 +175,7 @@ const SeccionVideojuegos = () => {
         </button>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SeccionVideojuegos;
+export default SeccionVideojuegos
