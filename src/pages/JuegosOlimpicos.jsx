@@ -1,149 +1,614 @@
-"use client"
+import { useState, useEffect } from "react"
 
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+const OlympicRing = ({ color, position, onClick, found }) => {
+  if (found) return null
+  
+  return (
+    <button
+      onClick={onClick}
+      className="fixed z-50 cursor-pointer hover:scale-110 transition-transform animate-bounce"
+      style={{ top: position.top, left: position.left }}
+      aria-label={`Aro olímpico ${color}`}
+    >
+      <svg width="50" height="50" viewBox="0 0 50 50">
+        <circle
+          cx="25"
+          cy="25"
+          r="18"
+          fill="none"
+          stroke={color}
+          strokeWidth="4"
+        />
+      </svg>
+    </button>
+  )
+}
 
 const JuegosOlimpicos = () => {
-  const navigate = useNavigate()
+  const [foundRings, setFoundRings] = useState([])
+  const [showTrivia, setShowTrivia] = useState(false)
+  const [triviaAnswers, setTriviaAnswers] = useState({})
+  const [showResults, setShowResults] = useState(false)
+
+  const rings = [
+    { id: 1, color: "#0085C7", position: { top: "15%", left: "10%" } },
+    { id: 2, color: "#000000", position: { top: "25%", left: "85%" } },
+    { id: 3, color: "#EE334E", position: { top: "45%", left: "5%" } },
+    { id: 4, color: "#FCB131", position: { top: "65%", left: "90%" } },
+    { id: 5, color: "#00A651", position: { top: "85%", left: "15%" } },
+  ]
+
+  const triviaQuestions = [
+    {
+      block: "Juegos Olímpicos",
+      tip: "Los Juegos Olímpicos no solo promueven la competencia, sino también la unión, el respeto y la excelencia. Participar importa tanto como ganar.",
+      questions: [
+        {
+          q: "¿Cada cuántos años se celebran los Juegos Olímpicos modernos?",
+          options: ["Cada 2 años", "Cada 4 años", "Cada 5 años"],
+          correct: 1
+        },
+        {
+          q: "¿Qué país organizó los primeros Juegos Olímpicos modernos en 1896?",
+          options: ["Francia", "Grecia", "Inglaterra"],
+          correct: 1
+        },
+        {
+          q: "¿Qué simboliza el color blanco del fondo en la bandera olímpica?",
+          options: ["La paz y la unión entre las naciones", "La pureza del deporte", "El continente europeo"],
+          correct: 0
+        }
+      ]
+    },
+    {
+      block: "Alimentación",
+      tip: "Una buena alimentación es tan importante como el entrenamiento. Comer bien antes, durante y después del ejercicio mejora el rendimiento, la concentración y la recuperación.",
+      questions: [
+        {
+          q: "¿Por qué los atletas suelen consumir carbohidratos antes de una competencia importante?",
+          options: ["Porque ayudan a mantener la energía durante el esfuerzo físico", "Porque aumentan la masa muscular rápidamente", "Porque hacen que el cuerpo sude menos"],
+          correct: 0
+        },
+        {
+          q: "¿Qué sucede si un deportista no se alimenta correctamente durante su preparación?",
+          options: ["Puede sufrir fatiga y bajo rendimiento físico", "Su cuerpo se acostumbra y no le afecta", "Puede ganar más fuerza por comer menos"],
+          correct: 0
+        },
+        {
+          q: "¿Por qué es importante la hidratación incluso antes de sentir sed?",
+          options: ["Porque la sed aparece cuando ya hay un leve grado de deshidratación", "Porque el agua mejora el aspecto físico", "Porque evita tener hambre"],
+          correct: 0
+        },
+        {
+          q: "Durante una competencia larga, como una maratón, ¿qué tipo de nutrientes necesita reponer principalmente el atleta?",
+          options: ["Grasas y sodio", "Carbohidratos y electrolitos", "Proteínas y calcio"],
+          correct: 1
+        }
+      ]
+    },
+    {
+      block: "Prejuicios",
+      tip: "El deporte enseña valores como el respeto, la igualdad y el trabajo en equipo. Romper prejuicios ayuda a que todos puedan participar sin importar su género, edad o apariencia.",
+      questions: [
+        {
+          q: "¿Cuál de estas frases refleja un prejuicio común en el deporte?",
+          options: ["Todos los deportes requieren esfuerzo", "Las mujeres no pueden practicar boxeo", "El entrenamiento constante mejora el rendimiento"],
+          correct: 1,
+          extra: "¿Sabías que una de las boxeadoras más reconocidas del mundo es Claressa Shields (EE. UU.)? Ganó dos medallas de oro olímpicas (Londres 2012 y Río 2016) y es campeona mundial profesional. Su historia demuestra que el talento y la dedicación no tienen género."
+        },
+        {
+          q: "¿Por qué los prejuicios afectan negativamente el ambiente deportivo?",
+          options: ["Porque limitan la participación y generan discriminación", "Porque ayudan a elegir mejores deportistas", "Porque hacen las competencias más justas"],
+          correct: 0
+        },
+        {
+          q: "¿Qué se puede hacer para reducir los prejuicios en el deporte y fomentar la inclusión?",
+          options: ["Promover la diversidad y el respeto entre todos", "Separar a las personas por su nivel económico", "Evitar que los principiantes participen"],
+          correct: 0
+        }
+      ]
+    }
+  ]
 
   useEffect(() => {
-    window.scrollTo({
-      top: 400,
-      behavior: "smooth",
-    })
+    window.scrollTo({ top: 400, behavior: "smooth" })
   }, [])
 
-  const handleScrollAndNavigate = (path) => {
-    navigate(path)
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 100)
+  const handleRingClick = (ringId) => {
+    if (!foundRings.includes(ringId)) {
+      setFoundRings([...foundRings, ringId])
+    }
   }
 
+  const allRingsFound = foundRings.length === 5
+  const isLocked = !allRingsFound
+
+  const handleAnswerSelect = (questionIndex, answerIndex) => {
+    setTriviaAnswers({ ...triviaAnswers, [questionIndex]: answerIndex.toString() })
+  }
+
+  const checkTrivia = () => {
+    setShowResults(true)
+  }
+
+  let questionCounter = 0
+
   return (
-    <section className="py-10 w-full space-y-12 text-black px-6">
-      {/* Hero / Introducción */}
-      <div className="relative bg-blue-100 rounded-xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
-        <div className="md:w-1/2">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">🏅 Juegos Olímpicos</h1>
-          <p className="mb-4">
-            El evento deportivo internacional más importante. Cada 4 años, atletas de todo el mundo compiten en
-            múltiples disciplinas.
+    <section className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 py-16 w-full space-y-16 px-4 sm:px-6 lg:px-8 relative">
+      {/* Aros Olímpicos dispersados */}
+      {rings.map((ring) => (
+        <OlympicRing
+          key={ring.id}
+          color={ring.color}
+          position={ring.position}
+          onClick={() => handleRingClick(ring.id)}
+          found={foundRings.includes(ring.id)}
+        />
+      ))}
+
+      {!allRingsFound && (
+        <div className="fixed top-6 right-6 z-50 bg-white rounded-2xl shadow-2xl p-5 border-2 border-blue-500 backdrop-blur-sm bg-opacity-95 transform transition-all hover:scale-105">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-2xl">🔍</span>
+            <p className="font-bold text-base text-gray-800">Busca los 5 aros</p>
+          </div>
+          <p className="text-sm text-gray-600 font-medium mb-3">
+            Encontrados: <span className="text-blue-600 font-bold">{foundRings.length}/5</span>
           </p>
-        </div>
-        <div className="md:w-1/2 h-64 bg-gray-300 rounded-xxl flex items-center justify-center">
-          <img src="/olimpicos-banner.jpeg" alt="" className="w-full h-full object-cover rounded-xl" />
-        </div>
-      </div>
-
-      {/* Historia */}
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Historia</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>776 a.C.: Juegos antiguos en Olimpia, Grecia.</li>
-            <li>Prohibidos en 393 d.C. por Teodosio I.</li>
-            <li>Renacimiento en 1896 gracias a Pierre de Coubertin.</li>
-            <li>Primera edición moderna: Atenas, 1896.</li>
-          </ul>
-        </div>
-        <div className="h-48 rounded-xl overflow-hidden shadow-md">
-          <img src="/olimpiadas.jpg" alt="Juegos Olímpicos antiguos" className="w-full h-full object-cover" />
-        </div>
-      </div>
-
-      {/* Evolución y Momentos */}
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="h-48 bg-gray-200 rounded-xl flex items-center justify-center">
-          <span className="text-black/50">Imagen Evolución</span>
-        </div>
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Evolución y Momentos</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Hoy participan profesionales y amateurs con delegaciones completas.</li>
-            <li>Más de 30 deportes actuales.</li>
-            <li>Momentos históricos: Berlín 1936, Tokio 2020, suspendidos por guerras.</li>
-            <li>Argentina: Oro en Polo, medallas de boxeo y atletismo.</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Ciencia, Innovación y Tecnología */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Ciencia, Innovación y Tecnología</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-4 rounded-xl space-y-2 text-black bg-gradient-to-r from-blue-100 to-blue-300 shadow-md">
-            <h3 className="font-semibold">Ciencia</h3>
-            <ul className="list-disc list-inside text-sm space-y-1">
-              <li>Optimización de entrenamiento y rendimiento.</li>
-              <li>Prevención de lesiones y control antidopaje.</li>
-            </ul>
-          </div>
-          <div className="p-4 rounded-xl space-y-2 text-black bg-gradient-to-r from-green-100 to-green-300 shadow-md">
-            <h3 className="font-semibold">Innovación</h3>
-            <ul className="list-disc list-inside text-sm space-y-1">
-              <li>Materiales de última generación.</li>
-              <li>Nuevos deportes y reglas.</li>
-              <li>Sostenibilidad en infraestructura.</li>
-            </ul>
-          </div>
-          <div className="p-4 rounded-xl space-y-2 text-black bg-gradient-to-r from-purple-100 to-purple-300 shadow-md">
-            <h3 className="font-semibold">Tecnología</h3>
-            <ul className="list-disc list-inside text-sm space-y-1">
-              <li>Entrenamiento: sensores, cámaras, simuladores.</li>
-              <li>Competencia: fotofinish, VAR, análisis de video.</li>
-              <li>Experiencia del espectador: realidad aumentada, apps.</li>
-            </ul>
+          <div className="flex gap-2">
+            {rings.map((ring) => (
+              <div
+                key={ring.id}
+                className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
+                  foundRings.includes(ring.id) ? 'scale-110 shadow-lg' : 'opacity-50'
+                }`}
+                style={{
+                  backgroundColor: foundRings.includes(ring.id) ? ring.color : "transparent",
+                  borderColor: ring.color
+                }}
+              />
+            ))}
           </div>
         </div>
+      )}
+
+      <div className="max-w-7xl mx-auto space-y-16">
+        <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl"></div>
+          <div className="md:w-1/2 z-10 space-y-6">
+            <div className="inline-block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full text-sm font-bold">
+              Edición Especial
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+              Juegos Olímpicos
+            </h1>
+            <p className="text-lg md:text-xl text-blue-50 leading-relaxed">
+              El evento deportivo internacional más importante del mundo. Cada 4 años, atletas de todo el planeta compiten en múltiples disciplinas, representando la excelencia deportiva y la unión global.
+            </p>
+            <div className="flex gap-3 pt-4">
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/30">
+                <p className="text-white text-sm font-semibold">200+ países</p>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/30">
+                <p className="text-white text-sm font-semibold">30+ deportes</p>
+              </div>
+            </div>
+          </div>
+          <div className="md:w-1/2 z-10">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+              <img 
+                src="/olimpicos-banner.jpg" 
+                alt="Juegos Olímpicos" 
+                className="w-full h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="space-y-6 order-2 md:order-1">
+            <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold">
+              Origen e Historia
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Un legado milenario</h2>
+            <div className="space-y-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-l-4 border-blue-500">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">🏛️</span>
+                <div>
+                  <p className="font-semibold text-gray-800">776 a.C.</p>
+                  <p className="text-gray-600 text-sm">Inicio de los Juegos antiguos en Olimpia, Grecia</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">⛔</span>
+                <div>
+                  <p className="font-semibold text-gray-800">393 d.C.</p>
+                  <p className="text-gray-600 text-sm">Prohibidos por el emperador Teodosio I</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">🔄</span>
+                <div>
+                  <p className="font-semibold text-gray-800">1896</p>
+                  <p className="text-gray-600 text-sm">Renacimiento moderno en Atenas por Pierre de Coubertin</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 md:order-2">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <img 
+                src="/olimpiadas-antiguas.jpg" 
+                alt="Juegos Olímpicos antiguos" 
+                className="w-full h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sección Bloqueada */}
+        {isLocked ? (
+          <div className="relative min-h-[400px]">
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md z-10 rounded-3xl flex flex-col items-center justify-center p-10 shadow-2xl border-2 border-gray-700">
+              <div className="text-center space-y-6 max-w-md">
+                <div className="relative">
+                  <div className="text-8xl animate-pulse">🔒</div>
+                  <div className="absolute inset-0 blur-2xl bg-blue-500/20 animate-pulse"></div>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-black text-white">
+                  Contenido Bloqueado
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Descubre los <span className="text-yellow-400 font-bold">5 aros olímpicos</span> escondidos en esta página para desbloquear contenido exclusivo sobre evolución, ciencia, tecnología y más.
+                </p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <p className="text-white font-bold text-2xl">
+                    {foundRings.length} <span className="text-gray-400 font-normal text-base">de</span> 5
+                  </p>
+                  <p className="text-gray-400 text-sm mt-1">Aros encontrados</p>
+                </div>
+                <div className="flex gap-2 justify-center pt-2">
+                  {rings.map((ring) => (
+                    <div
+                      key={ring.id}
+                      className={`w-6 h-6 rounded-full border-3 transition-all duration-300 ${
+                        foundRings.includes(ring.id) ? 'scale-125 shadow-lg' : 'opacity-30'
+                      }`}
+                      style={{
+                        backgroundColor: foundRings.includes(ring.id) ? ring.color : "transparent",
+                        borderColor: ring.color,
+                        borderWidth: '3px'
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Contenido bloqueado (difuminado) */}
+            <div className="blur-lg pointer-events-none select-none opacity-30">
+              <div className="grid md:grid-cols-2 gap-8 mb-12 p-8">
+                <div className="h-64 bg-gray-300 rounded-xl" />
+                <div className="space-y-4">
+                  <div className="h-8 bg-gray-300 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                    <div className="h-4 bg-gray-300 rounded w-4/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition-transform duration-300">
+              <div className="text-6xl mb-3 animate-bounce">🎉</div>
+              <h3 className="text-3xl font-black text-white mb-2">¡Felicitaciones!</h3>
+              <p className="text-green-50 text-lg">
+                Has encontrado todos los aros olímpicos. Ahora puedes acceder al contenido completo.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div className="order-2 md:order-1">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+                  <img 
+                    src="/evolucion-olimpiadas.jpg" 
+                    alt="Evolución Olímpica" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              </div>
+              <div className="space-y-6 order-1 md:order-2">
+                <div className="inline-block bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-bold">
+                  Evolución Histórica
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Momentos inolvidables</h2>
+                <div className="space-y-4">
+                  <div className="bg-white rounded-xl p-5 shadow-md border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
+                    <p className="text-gray-700 font-medium">Profesionales y amateurs compiten con delegaciones completas</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500 hover:shadow-lg transition-shadow">
+                    <p className="text-gray-700 font-medium">Más de 30 deportes en competencia actual</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 shadow-md border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
+                    <p className="text-gray-700 font-medium">Momentos históricos: Berlín 1936, Tokio 2020</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 shadow-md border-l-4 border-cyan-500 hover:shadow-lg transition-shadow">
+                    <p className="text-gray-700 font-medium">Argentina: medallas en Polo, boxeo y atletismo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              <div className="text-center space-y-3">
+                <div className="inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-bold">
+                  El Futuro del Deporte
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Ciencia, Innovación y Tecnología</h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Los avances científicos y tecnológicos transforman el rendimiento deportivo y la experiencia olímpica
+                </p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                  <div className="text-5xl mb-4">🔬</div>
+                  <h3 className="text-2xl font-bold mb-4">Ciencia</h3>
+                  <ul className="space-y-3 text-blue-50">
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Optimización de entrenamiento y rendimiento</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Prevención de lesiones y control antidopaje</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="group bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                  <div className="text-5xl mb-4">💡</div>
+                  <h3 className="text-2xl font-bold mb-4">Innovación</h3>
+                  <ul className="space-y-3 text-green-50">
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Materiales de última generación</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Nuevos deportes y reglas</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Sostenibilidad en infraestructura</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="group bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                  <div className="text-5xl mb-4">⚡</div>
+                  <h3 className="text-2xl font-bold mb-4">Tecnología</h3>
+                  <ul className="space-y-3 text-purple-50">
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Sensores, cámaras y simuladores</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Fotofinish y VAR en competencias</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-300 font-bold">•</span>
+                      <span>Realidad aumentada para espectadores</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div className="space-y-6">
+                <div className="inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-bold">
+                  Alimentación de Alto Rendimiento
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Nutrición Olímpica</h2>
+                <div className="space-y-4">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-5 shadow-md border-l-4 border-orange-500">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">🍽️</span>
+                      <p className="text-gray-700 font-medium">Hasta 7.000 calorías diarias por atleta</p>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-5 shadow-md border-l-4 border-amber-500">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">📱</span>
+                      <p className="text-gray-700 font-medium">Apps y sensores de nutrición avanzados</p>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">🏢</span>
+                      <p className="text-gray-700 font-medium">Comedores gigantes en villas olímpicas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+                  <img 
+                    src="/nutricion-olimpica.jpg" 
+                    alt="Nutrición Olímpica" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-3xl p-8 md:p-10 shadow-2xl">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-5xl">💎</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900">Datos Curiosos</h2>
+              </div>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-3xl mb-3">📸</div>
+                  <p className="text-gray-800 font-semibold">Fotofinish: 10.000 cuadros por segundo</p>
+                </div>
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-3xl mb-3">🌱</div>
+                  <p className="text-gray-800 font-semibold">París 2024: Villa 100% energía renovable</p>
+                </div>
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-3xl mb-3">🚴</div>
+                  <p className="text-gray-800 font-semibold">Bicicletas con fibra de carbono aeroespacial</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-100 to-gray-100 rounded-3xl p-8 md:p-10 shadow-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-4xl">🎤</span>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900">Entrevista a Marcos</h2>
+                  <p className="text-gray-600 mt-1">Experiencia en pádel y tecnología deportiva</p>
+                </div>
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Marcos comparte su experiencia en el pádel, la tecnología en el deporte y la importancia del espíritu olímpico en la formación de atletas de alto rendimiento.
+              </p>
+              <div className="relative h-80 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl flex items-center justify-center shadow-inner overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
+                <div className="text-center z-10">
+                  <div className="text-6xl mb-3">🎬</div>
+                  <span className="text-gray-500 font-semibold text-lg">Próximamente</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Nutrición Olímpica */}
-      <div className="grid md:grid-cols-2 gap-8">
+      {/* Trivia Interactiva - Mantienen estilos originales */}
+      {allRingsFound && (
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Nutrición Olímpica</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Hasta 7.000 calorías/día por atleta.</li>
-            <li>Apps y sensores de nutrición.</li>
-            <li>Comedores gigantes en villas olímpicas.</li>
-          </ul>
-        </div>
-        <div className="h-48 bg-gray-200 rounded-xl flex items-center justify-center">
-          <span className="text-black/50">Imagen Nutrición</span>
-        </div>
-      </div>
+          <div className="flex justify-center">
+            <button
+              onClick={() => setShowTrivia(!showTrivia)}
+              className="text-white font-semibold px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg text-lg"
+            >
+              {showTrivia ? "Ocultar Trivia 📚" : "🎯 ¡Pon a prueba tus conocimientos! 🎯"}
+            </button>
+          </div>
 
-      {/* Datos Curiosos */}
-      <div className="p-6 bg-yellow-50 rounded-xl space-y-2">
-        <h2 className="text-2xl font-semibold">Datos Curiosos</h2>
-        <ul className="list-disc list-inside text-sm space-y-1">
-          <li>Fotofinish: 10.000 cuadros/segundo.</li>
-          <li>París 2024: Villa Olímpica con energía 100% renovable.</li>
-          <li>Bicicletas de pista con fibra de carbono aeroespacial.</li>
-        </ul>
-      </div>
+          {showTrivia && (
+            <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-8 border-2 border-purple-300 space-y-8">
+              <h2 className="text-3xl font-bold text-center text-purple-800">Trivia Interactiva</h2>
+              
+              {triviaQuestions.map((block, blockIndex) => (
+                <div key={blockIndex} className="space-y-6">
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <h3 className="text-2xl font-semibold text-purple-700 mb-2">Bloque {blockIndex + 1} - {block.block}</h3>
+                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                      <p className="text-sm italic text-gray-700">💡 <strong>Tip:</strong> {block.tip}</p>
+                    </div>
+                  </div>
 
-      {/* Entrevista */}
-      <div className="p-6 bg-gray-50 rounded-xl space-y-4">
-        <h2 className="text-2xl font-semibold">Entrevista a Marcos</h2>
-        <p className="text-sm">
-          Marcos comparte su experiencia en el pádel, la tecnología en el deporte y la importancia del espíritu
-          olímpico.
-        </p>
-        <div className="h-48 bg-gray-200 rounded-xl flex items-center justify-center">
-          <span className="text-black/50">Próximamente</span>
+                  {block.questions.map((question, qIndex) => {
+                    const globalIndex = questionCounter++
+                    const userAnswer = triviaAnswers[globalIndex]
+                    const isCorrect = userAnswer === question.correct.toString()
+                    
+                    return (
+                      <div key={qIndex} className="bg-white rounded-lg p-6 shadow-md space-y-4">
+                        <h4 className="font-semibold text-lg text-gray-800">{question.q}</h4>
+                        <div className="space-y-2">
+                          {question.options.map((option, optIndex) => {
+                            const isSelected = userAnswer === optIndex.toString()
+                            const isCorrectAnswer = optIndex === question.correct
+                            
+                            let bgColor = "bg-gray-50 hover:bg-gray-100"
+                            if (showResults) {
+                              if (isCorrectAnswer) {
+                                bgColor = "bg-green-100 border-green-500"
+                              } else if (isSelected && !isCorrect) {
+                                bgColor = "bg-red-100 border-red-500"
+                              }
+                            } else if (isSelected) {
+                              bgColor = "bg-blue-100 border-blue-500"
+                            }
+                            
+                            return (
+                              <button
+                                key={optIndex}
+                                onClick={() => !showResults && handleAnswerSelect(globalIndex, optIndex)}
+                                disabled={showResults}
+                                className={`w-full text-left p-4 rounded-lg border-2 transition-all ${bgColor} ${
+                                  showResults ? "cursor-default" : "cursor-pointer"
+                                }`}
+                              >
+                                <span className="flex items-center gap-2">
+                                  {showResults && isCorrectAnswer && "✅"}
+                                  {showResults && isSelected && !isCorrect && "❌"}
+                                  {String.fromCharCode(97 + optIndex)}) {option}
+                                </span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                        {showResults && question.extra && (
+                          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mt-4">
+                            <p className="text-sm text-gray-700">{question.extra}</p>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              ))}
+
+              {!showResults ? (
+                <div className="flex justify-center">
+                  <button
+                    onClick={checkTrivia}
+                    className="text-white font-semibold px-8 py-4 rounded-lg bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg text-lg"
+                  >
+                    Ver Resultados 📊
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-white rounded-lg p-6 shadow-lg text-center">
+                  <h3 className="text-2xl font-bold text-purple-700 mb-4">Resultados</h3>
+                  <p className="text-lg">
+                    Has respondido correctamente{" "}
+                    <span className="font-bold text-green-600">
+                      {Object.keys(triviaAnswers).filter((key) => {
+                        let counter = 0
+                        for (const block of triviaQuestions) {
+                          for (const q of block.questions) {
+                            if (counter.toString() === key) {
+                              return triviaAnswers[key] === q.correct.toString()
+                            }
+                            counter++
+                          }
+                        }
+                        return false
+                      }).length}
+                    </span>{" "}
+                    de <span className="font-bold">{triviaQuestions.reduce((acc, block) => acc + block.questions.length, 0)}</span> preguntas.
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">¡Sigue aprendiendo sobre los Juegos Olímpicos! 🏅</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* Botón de volver al home */}
-      <div className="flex justify-center mt-10">
-        <button
-          onClick={() => handleScrollAndNavigate("/")}
-          className="text-white font-semibold px-6 py-3 rounded-lg bg-[#7b91fe] hover:bg-[#6b81ee] transition-colors"
-        >
-          Volver
-        </button>
-      </div>
+      )}
     </section>
   )
 }
