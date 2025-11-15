@@ -6,18 +6,18 @@ const OlympicRing = ({ color, position, onClick, found }) => {
   return (
     <button
       onClick={onClick}
-      className="fixed z-50 cursor-pointer hover:scale-110 transition-transform animate-bounce"
+      className="fixed z-50 cursor-pointer hover:scale-110 transition-transform opacity-30 hover:opacity-100"
       style={{ top: position.top, left: position.left }}
       aria-label={`Aro olímpico ${color}`}
     >
-      <svg width="50" height="50" viewBox="0 0 50 50">
+      <svg width="35" height="35" viewBox="0 0 35 35">
         <circle
-          cx="25"
-          cy="25"
-          r="18"
+          cx="17.5"
+          cy="17.5"
+          r="12"
           fill="none"
           stroke={color}
-          strokeWidth="4"
+          strokeWidth="3"
         />
       </svg>
     </button>
@@ -31,11 +31,11 @@ const JuegosOlimpicos = () => {
   const [showResults, setShowResults] = useState(false)
 
   const rings = [
-    { id: 1, color: "#0085C7", position: { top: "15%", left: "10%" } },
-    { id: 2, color: "#000000", position: { top: "25%", left: "85%" } },
-    { id: 3, color: "#EE334E", position: { top: "45%", left: "5%" } },
-    { id: 4, color: "#FCB131", position: { top: "65%", left: "90%" } },
-    { id: 5, color: "#00A651", position: { top: "85%", left: "15%" } },
+    { id: 1, color: "#0085C7", position: { top: "20%", left: "5%" } },
+    { id: 2, color: "#000000", position: { top: "35%", left: "92%" } },
+    { id: 3, color: "#EE334E", position: { top: "55%", left: "3%" } },
+    { id: 4, color: "#FCB131", position: { top: "70%", left: "95%" } },
+    { id: 5, color: "#00A651", position: { top: "88%", left: "8%" } },
   ]
 
   const triviaQuestions = [
@@ -197,7 +197,7 @@ const JuegosOlimpicos = () => {
           <div className="md:w-1/2 z-10">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <img 
-                src="/olimpicos-banner.jpg" 
+                src="public\juegosOlimpicoslogo.webp" 
                 alt="Juegos Olímpicos" 
                 className="w-full h-80 object-cover"
               />
@@ -239,7 +239,7 @@ const JuegosOlimpicos = () => {
           <div className="order-1 md:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
               <img 
-                src="/olimpiadas-antiguas.jpg" 
+                src="/public/juegosantiguos.webp" 
                 alt="Juegos Olímpicos antiguos" 
                 className="w-full h-80 object-cover"
               />
@@ -316,7 +316,7 @@ const JuegosOlimpicos = () => {
               <div className="order-2 md:order-1">
                 <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
-                    src="/evolucion-olimpiadas.jpg" 
+                    src="public/EVOLUCION.webp" 
                     alt="Evolución Olímpica" 
                     className="w-full h-80 object-cover"
                   />
@@ -441,7 +441,7 @@ const JuegosOlimpicos = () => {
               <div>
                 <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
                   <img 
-                    src="/nutricion-olimpica.jpg" 
+                    src="/public/nutricion.webp" 
                     alt="Nutrición Olímpica" 
                     className="w-full h-80 object-cover"
                   />
@@ -467,26 +467,6 @@ const JuegosOlimpicos = () => {
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                   <div className="text-3xl mb-3">🚴</div>
                   <p className="text-gray-800 font-semibold">Bicicletas con fibra de carbono aeroespacial</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-slate-100 to-gray-100 rounded-3xl p-8 md:p-10 shadow-xl">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-4xl">🎤</span>
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-900">Entrevista a Marcos</h2>
-                  <p className="text-gray-600 mt-1">Experiencia en pádel y tecnología deportiva</p>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                Marcos comparte su experiencia en el pádel, la tecnología en el deporte y la importancia del espíritu olímpico en la formación de atletas de alto rendimiento.
-              </p>
-              <div className="relative h-80 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl flex items-center justify-center shadow-inner overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
-                <div className="text-center z-10">
-                  <div className="text-6xl mb-3">🎬</div>
-                  <span className="text-gray-500 font-semibold text-lg">Próximamente</span>
                 </div>
               </div>
             </div>

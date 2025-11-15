@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// Sección de Videojuegos
 const Videojuegos = () => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('historia')
   const [expandedCard, setExpandedCard] = useState(null)
 
   useEffect(() => {
-    window.scrollTo({ top: 400, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
   const handleScrollAndNavigate = (path) => {
@@ -31,7 +32,7 @@ const Videojuegos = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Hero Section con animación */}
+      {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40"></div>
         
@@ -101,7 +102,7 @@ const Videojuegos = () => {
       </div>
 
       <div className="px-6 md:px-12 py-12">
-        {/* Historia Section */}
+        {/* Sección Historia */}
         {activeTab === 'historia' && (
           <div className="space-y-8 animate-fadeIn">
             <h2 className="text-4xl font-black text-white mb-8 flex items-center gap-3">
@@ -170,7 +171,7 @@ const Videojuegos = () => {
           </div>
         )}
 
-        {/* Argentina Section */}
+        {/* Sección Argentina */}
         {activeTab === 'argentina' && (
           <div className="space-y-8 animate-fadeIn">
             <h2 className="text-4xl font-black text-white mb-8 flex items-center gap-3">
@@ -207,7 +208,7 @@ const Videojuegos = () => {
           </div>
         )}
 
-        {/* Novedades Section */}
+        {/* Sección Novedades */}
         {activeTab === 'novedades' && (
           <div className="space-y-8 animate-fadeIn">
             <h2 className="text-4xl font-black text-white mb-8 flex items-center gap-3">
@@ -238,7 +239,7 @@ const Videojuegos = () => {
           </div>
         )}
 
-        {/* Más Allá Section */}
+        {/* Sección Más Allá */}
         {activeTab === 'masalla' && (
           <div className="space-y-8 animate-fadeIn">
             <h2 className="text-4xl font-black text-white mb-8 flex items-center gap-3">
@@ -316,6 +317,7 @@ const Videojuegos = () => {
           </div>
         )}
 
+        {/* Sección del Juego BattleShips Duel */}
         <div className="mt-20 space-y-8">
           <div className="text-center mb-12">
             <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
@@ -491,7 +493,7 @@ const Videojuegos = () => {
         </div>
 
         {/* Botón volver */}
-        <div className="flex justify-center mt-16">
+        <div className="flex justify-center mt-16 pb-8">
           <button
             onClick={() => handleScrollAndNavigate('/')}
             className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold text-xl px-12 py-4 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:shadow-purple-500/50"

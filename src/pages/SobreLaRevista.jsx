@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
+// Sección Sobre La Revista
 export default function SobreLaRevista() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    window.scrollTo({ top: 400, behavior: "smooth" });
-    setTimeout(() => setIsVisible(true), 200);
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" })
+    setTimeout(() => setIsVisible(true), 200)
+  }, [])
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-start py-12 px-6 md:px-10 lg:px-16">
-      <div className="w-full max-w-6xl">
-        {/* Header con animación */}
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <div className="w-full px-6 md:px-10 lg:px-16 py-16">
+        {/* Header */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-block mb-4">
             <span className="px-4 py-2 bg-gradient-to-r from-[#7b91fe] to-[#41599f] text-white text-sm font-bold rounded-full shadow-lg">
@@ -33,14 +34,14 @@ export default function SobreLaRevista() {
           </div>
         </div>
 
-        {/* Subtítulo destacado */}
+        {/* Subtítulo */}
         <div className={`bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-10 border-2 border-blue-100 shadow-lg transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <p className="text-xl text-gray-800 text-center leading-relaxed font-medium">
             Descubrí cómo la ciencia y la tecnología transforman nuestra vida cotidiana, la educación y la cultura.
           </p>
         </div>
 
-        {/* Contenido principal con cards */}
+        {/* Contenido principal */}
         <section className={`space-y-6 mb-12 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
             <div className="flex items-start gap-4">
@@ -104,7 +105,7 @@ export default function SobreLaRevista() {
           </div>
         </section>
 
-        {/* Galería de imágenes mejorada */}
+        {/* Galería */}
         <div className={`mt-12 mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl font-bold text-center mb-8" style={{ color: "#15274b" }}>
             Nuestra Comunidad
@@ -131,7 +132,7 @@ export default function SobreLaRevista() {
           </div>
         </div>
 
-        {/* Botón de retorno mejorado */}
+        {/* Botón de retorno */}
         <div className={`flex justify-center mt-8 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <Link
             to="/"
@@ -150,5 +151,5 @@ export default function SobreLaRevista() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -51,55 +51,24 @@ export default function HeroArticle() {
             <span className="text-blue-200 font-medium">Aquí los jóvenes dan vida a sus descubrimientos y contagian su pasión por la ciencia y la tecnología.</span>
           </p>
 
-          {/* Stats or features */}
-          <div className="mt-10 flex flex-wrap gap-6 justify-start md:justify-start px-2">
-            <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20 shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <span className="text-2xl">🎓</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold text-lg">Innovación</p>
-                <p className="text-gray-200 text-sm">Estudiantil</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20 shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <span className="text-2xl">🚀</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold text-lg">Proyectos</p>
-                <p className="text-gray-200 text-sm">Creativos</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/15 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20 shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <span className="text-2xl">💡</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold text-lg">Ciencia</p>
-                <p className="text-gray-200 text-sm">y Tecnología</p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-10 mb-4 px-2">
+          {/* CTA Button - Ahora más prominente */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-8 mb-4 px-2">
             <Link
               to="/sobre-la-revista"
-              className="group relative inline-flex items-center justify-center text-white font-semibold px-10 py-4 rounded-xl bg-gradient-to-r from-[#7b91fe] to-[#6b81ee] hover:from-[#6b81ee] hover:to-[#5a70dd] transition-all duration-300 text-center shadow-lg hover:shadow-2xl hover:scale-105 overflow-hidden"
+              className="group relative inline-flex items-center justify-center text-white font-bold text-xl px-16 py-6 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 transition-all duration-300 text-center shadow-2xl hover:shadow-blue-500/50 hover:scale-105 overflow-hidden border-4 border-white"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                Leer Artículo
+              <span className="relative z-10 flex items-center gap-3">
+                📖 Leer Artículo Completo
                 <svg 
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                  className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
             </Link>
           </div>
         </div>
