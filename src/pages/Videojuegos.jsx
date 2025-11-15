@@ -79,7 +79,7 @@ const Videojuegos = () => {
       {/* Tabs de navegación */}
       <div className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-purple-500/30 shadow-lg">
         <div className="flex justify-center px-6 md:px-12 py-4">
-          <div className="flex gap-4 overflow-x-auto">
+          <div className="flex gap-4 flex-wrap justify-center">
             {['historia', 'argentina', 'novedades', 'masalla'].map((tab) => (
               <button
                 key={tab}
