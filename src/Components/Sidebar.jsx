@@ -26,7 +26,7 @@ export default function Sidebar() {
         <div className="grid grid-cols-2 gap-3">
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/img1.jpg"
+              src="/public/110ed0df-8a17-4dfe-aa2e-24ea2d05accc.jpg"
               alt="Recuerdo 1"
               className="h-28 w-full object-cover"
             />
@@ -34,7 +34,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/img2.jpg"
+              src="/public/a485c002-2265-4721-9501-16f605339b06.jpg"
               alt="Recuerdo 2"
               className="h-28 w-full object-cover"
             />
@@ -42,7 +42,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/img3.jpg"
+              src="/public/ESTA.jpg"
               alt="Recuerdo 3"
               className="h-28 w-full object-cover"
             />
@@ -50,7 +50,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/img4.jpg"
+              src="/public/04a1e235-5e0a-484d-9db1-f2de3139f2e4.jpg"
               alt="Recuerdo 4"
               className="h-28 w-full object-cover"
             />
@@ -83,7 +83,7 @@ export default function Sidebar() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
         <div className="absolute bottom-4 left-4 right-4">
           <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-800">
-            Publicidad
+            5to año
           </span>
         </div>
       </div>

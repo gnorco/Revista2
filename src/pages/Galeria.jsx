@@ -34,8 +34,7 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
       caption:
         "Luego de la presentación de la revista en Feria de Ciencias, junto a la profesora coordinamos las nuevas cosas que debíamos agregar a la revista.",
       images: [
-        "https://via.placeholder.com/800x600?text=Foto+D+1",
-        "https://via.placeholder.com/800x600?text=Foto+D+2",
+        "/public/IMG_8134.jpg",
       ],
     },
   ];
@@ -48,6 +47,8 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
   const [modalCaption, setModalCaption] = useState("");
+
+  console.log("[v0] Galleries data:", galleries);
 
   function openModal(imgUrl, caption) {
     setModalImage(imgUrl);
@@ -62,105 +63,103 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
   }
 
   return (
-    <div className="container my-4">
-      {galleries.map((g) => (
-        <section key={g.key} className="mb-5">
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <div>
-              <h4 className="mb-1">{g.title}</h4>
-              <p className="mb-0 text-muted" style={{ maxWidth: "70ch" }}>
-                {g.caption}
-              </p>
+    // CAMBIO AQUI:
+    // Se eliminó 'container mx-auto max-w-7xl' y 'overflow-x-hidden'.
+    // Ahora solo usa el padding y margin (px-4 my-8), asumiendo que el componente padre (App.jsx)
+    // maneja el ancho máximo y el centrado para todo el contenido de la página.
+    <div className="px-4 my-8">
+      <div className="text-center mb-12">
+        {/*
+          CAMBIO ANTERIOR:
+          Reemplazado 'text-dark' por 'text-black' para garantizar el color negro puro.
+        */}
+        <h1 className="text-5xl font-bold text-black">Galería</h1>
+      </div>
+     
+      {galleries.map((g) => {
+        console.log("[v0] Gallery caption:", g.caption);
+       
+        return (
+          <section key={g.key} className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-foreground">{g.title}</h2>
             </div>
-          </div>
 
-          <div className="row g-3">
-            {Array.isArray(g.images) && g.images.length > 0 ? (
-              g.images.map((src, idx) => (
-                <div key={idx} className="col-6 col-sm-4 col-md-3">
-                  <div className="card h-100 shadow-sm overflow-hidden">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {Array.isArray(g.images) && g.images.length > 0 ? (
+                g.images.map((src, idx) => (
+                  <div key={idx} className="w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] lg:w-[calc(25%-0.75rem)]">
                     <button
                       type="button"
-                      className="btn p-0 border-0 text-start w-100"
+                      className="w-full p-0 border-0 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200"
                       onClick={() =>
                         openModal(src, `${g.title} — Imagen ${idx + 1}`)
                       }
                       style={{ background: "transparent" }}
                     >
                       <img
-                        src={src}
+                        src={src || "/placeholder.svg"}
                         alt={`${g.title} ${idx + 1}`}
-                        className="card-img-top img-fluid"
-                        style={{
-                          width: "100%",
-                          height: "200px",
-                          objectFit: "cover",
-                        }}
+                        className="w-full h-64 object-cover"
                       />
                     </button>
-                    <div className="card-body py-2 px-2">
-                      <small className="text-muted">
-                        {g.title} — {idx + 1}
-                      </small>
-                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="w-full text-center py-8">
+                  <p className="text-muted-foreground">No hay imágenes para mostrar.</p>
                 </div>
-              ))
-            ) : (
-              <div className="col-12">
-                <p className="text-muted">No hay imágenes para mostrar.</p>
+              )}
+            </div>
+
+            {g.caption && (
+              <div className="text-center max-w-3xl mx-auto px-4">
+                <p className="text-lg text-gray-800 leading-relaxed bg-gray-100 p-6 rounded-lg border border-gray-300">
+                  {g.caption}
+                </p>
               </div>
             )}
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
-      {/* Simple modal */}
       {modalOpen && (
         <div
-          className="modal fade show d-block"
-          tabIndex={-1}
-          role="dialog"
-          aria-modal="true"
-          style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div
-            className="modal-dialog modal-dialog-centered modal-lg"
-            role="document"
+            className="relative bg-card rounded-lg shadow-2xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{modalCaption}</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  aria-label="Close"
-                  onClick={closeModal}
-                ></button>
-              </div>
-              <div className="modal-body text-center">
-                <img
-                  src={modalImage}
-                  alt={modalCaption}
-                  className="img-fluid"
-                  style={{
-                    maxHeight: "80vh",
-                    objectFit: "contain",
-                    borderRadius: "8px",
-                  }}
-                />
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={closeModal}
-                >
-                  Cerrar
-                </button>
-              </div>
+            <div className="flex items-center justify-between p-4 border-b border-border">
+              <h3 className="text-xl font-semibold text-foreground">{modalCaption}</h3>
+              <button
+                type="button"
+                className="text-muted-foreground hover:text-foreground transition-colors p-2 rounded-md hover:bg-muted"
+                aria-label="Close"
+                onClick={closeModal}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6 flex items-center justify-center bg-muted/30">
+              <img
+                src={modalImage || "/placeholder.svg"}
+                alt={modalCaption}
+                className="max-h-[70vh] w-auto object-contain rounded-lg"
+              />
+            </div>
+            <div className="flex justify-end p-4 border-t border-border">
+              <button
+                type="button"
+                className="px-6 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors font-medium"
+                onClick={closeModal}
+              >
+                Cerrar
+              </button>
             </div>
           </div>
         </div>

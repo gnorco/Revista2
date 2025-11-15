@@ -21,10 +21,10 @@ const Cocina = () => {
   ];
 
   const chefs = [
-    { nombre: "Fernando Rivarola", especialidad: "Cocina de territorio / producto local" },
-    { nombre: "René Redzepi", especialidad: "Fermentación / foraging (recolección silvestre)" },
-    { nombre: "Ferran Adrià", especialidad: "Cocina molecular / deconstrucción" },
-    { nombre: "Paco Pérez", especialidad: "Impresión 3D" },
+    { nombre: "Fernando Rivarola", especialidad: "Cocina de territorio / producto local", imagen: "/public/fernando-Rivarola.jpg" },
+    { nombre: "René Redzepi", especialidad: "Fermentación / foraging (recolección silvestre)", imagen: "/public/rene.webp" },
+    { nombre: "Ferran Adrià", especialidad: "Cocina molecular / deconstrucción", imagen: "/public/ferran-adria.jpg" },
+    { nombre: "Paco Pérez", especialidad: "Impresión 3D", imagen: "/public/paco.webp" },
   ];
 
   const curiosidades = [
@@ -153,11 +153,11 @@ const Cocina = () => {
   ];
 
   const chefsCordobeses = [
-    { nombre: "Miguel Escalante", instagram: "@miguescalante" },
-    { nombre: "Lucas Galán", instagram: "@lucasgalan_chef" },
-    { nombre: "Dante Enríquez", instagram: "@danteenriquez" },
-    { nombre: "Darío Brugnon", instagram: "@dariobrugnon" },
-    { nombre: "Julio Figueroa", instagram: "@juliofigueroachef" }
+    { nombre: "Miguel Escalante", instagram: "@miguescalante", imagen: "/public/escalante.jpg" },
+    { nombre: "Lucas Galán", instagram: "@lucasgalan_chef", imagen: "/public/galan.jpg" },
+    { nombre: "Dante Enríquez", instagram: "@danteenriquez", imagen: "/public/enriquez.jpg" },
+    { nombre: "Darío Brugnon", instagram: "@dariobrugnon", imagen: "/public/brugnon.jpg" },
+    { nombre: "Julio Figueroa", instagram: "@juliofigueroachef", imagen: "/public/figueroa.jpg" }
   ];
 
   // Initialize shuffled timeline
@@ -366,9 +366,15 @@ const Cocina = () => {
                 key={i}
                 className="flex flex-col items-center bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 hover:scale-105 border-2 border-amber-200"
               >
-                <div className="w-28 h-28 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full flex items-center justify-center text-3xl font-bold text-white shadow-lg mb-4">
-                  {c.nombre.split(" ").map((n) => n[0]).join("")}
+                {/* Círculo con Imagen (Innovadores) */}
+                <div className="w-28 h-28 bg-gray-200 rounded-full shadow-lg mb-4 overflow-hidden">
+                  <img
+                    src={c.imagen} // Usa la URL de la imagen del chef
+                    alt={`Foto de ${c.nombre}`}
+                    className="w-full h-full object-cover" // Asegura que la imagen cubra el círculo
+                  />
                 </div>
+
                 <h3 className="font-bold text-xl text-gray-800 text-center mb-2">{c.nombre}</h3>
                 <p className="text-gray-600 text-center text-sm">{c.especialidad}</p>
               </div>
@@ -422,9 +428,15 @@ const Cocina = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {chefsCordobeses.map((chef, i) => (
                 <div key={i} className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition-all hover:scale-105">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-2xl font-bold text-white mx-auto mb-3 shadow-lg">
-                    {chef.nombre.split(" ").map((n) => n[0]).join("")}
+                  {/* **MODIFICACIÓN 2: Reemplazo del div de iniciales por la imagen** */}
+                  <div className="w-20 h-20 bg-gray-200 rounded-full shadow-lg mx-auto mb-3 overflow-hidden">
+                    <img
+                      src={chef.imagen} // Usa la URL de la imagen del chef cordobés
+                      alt={`Foto de ${chef.nombre}`}
+                      className="w-full h-full object-cover" // Asegura que la imagen cubra el círculo
+                    />
                   </div>
+
                   <h4 className="font-bold text-gray-800 mb-2">{chef.nombre}</h4>
                   <a 
                     href={`https://instagram.com/${chef.instagram.replace('@', '')}`}

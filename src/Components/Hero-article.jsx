@@ -35,7 +35,7 @@ export default function HeroArticle() {
         <div className={`max-w-4xl px-4 md:px-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           
           {/* Badge */}
-          <div className="inline-block mb-4 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+          <div className="inline-block mt-16 mb-4 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
             <span className="text-white font-semibold text-sm tracking-wide">✨ Edición 2025</span>
           </div>
 
