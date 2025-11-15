@@ -26,7 +26,7 @@ export default function Sidebar() {
         <div className="grid grid-cols-2 gap-3">
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/public/110ed0df-8a17-4dfe-aa2e-24ea2d05accc.jpg"
+              src="/110ed0df-8a17-4dfe-aa2e-24ea2d05accc.jpg"
               alt="Recuerdo 1"
               className="h-28 w-full object-cover"
             />
@@ -34,7 +34,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/public/a485c002-2265-4721-9501-16f605339b06.jpg"
+              src="/a485c002-2265-4721-9501-16f605339b06.jpg"
               alt="Recuerdo 2"
               className="h-28 w-full object-cover"
             />
@@ -42,7 +42,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/public/ESTA.jpg"
+              src="/ESTA.jpg"
               alt="Recuerdo 3"
               className="h-28 w-full object-cover"
             />
@@ -50,7 +50,7 @@ export default function Sidebar() {
           </div>
           <div className="relative overflow-hidden rounded-xl group-hover:scale-105 transition-transform duration-300">
             <img
-              src="/public/04a1e235-5e0a-484d-9db1-f2de3139f2e4.jpg"
+              src="/04a1e235-5e0a-484d-9db1-f2de3139f2e4.jpg"
               alt="Recuerdo 4"
               className="h-28 w-full object-cover"
             />

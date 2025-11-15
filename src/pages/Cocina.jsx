@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const Cocina = () => {
+// Sección de Cocina
+export default function Cocina() {
   const [selectedRecipeType, setSelectedRecipeType] = useState(null);
   const [expandedRecipe, setExpandedRecipe] = useState(null);
   const [showRecetario, setShowRecetario] = useState(false);
@@ -21,10 +22,10 @@ const Cocina = () => {
   ];
 
   const chefs = [
-    { nombre: "Fernando Rivarola", especialidad: "Cocina de territorio / producto local", imagen: "/public/fernando-Rivarola.jpg" },
-    { nombre: "René Redzepi", especialidad: "Fermentación / foraging (recolección silvestre)", imagen: "/public/rene.webp" },
-    { nombre: "Ferran Adrià", especialidad: "Cocina molecular / deconstrucción", imagen: "/public/ferran-adria.jpg" },
-    { nombre: "Paco Pérez", especialidad: "Impresión 3D", imagen: "/public/paco.webp" },
+    { nombre: "Fernando Rivarola", especialidad: "Cocina de territorio / producto local", imagen: "/fernando-Rivarola.jpg" },
+    { nombre: "René Redzepi", especialidad: "Fermentación / foraging (recolección silvestre)", imagen: "/rene.webp" },
+    { nombre: "Ferran Adrià", especialidad: "Cocina molecular / deconstrucción", imagen: "/ferran-adria.jpg" },
+    { nombre: "Paco Pérez", especialidad: "Impresión 3D", imagen: "/paco.webp" },
   ];
 
   const curiosidades = [
@@ -34,7 +35,6 @@ const Cocina = () => {
     "Apps de cocina y sensores permiten medir proteínas, carbohidratos y grasas en tiempo real.",
   ];
 
-  // Timeline data
   const timelineData = [
     {
       id: 1,
@@ -87,7 +87,6 @@ const Cocina = () => {
     }
   ];
 
-  // Recipes data
   const recetas = {
     postres: [
       {
@@ -145,7 +144,6 @@ const Cocina = () => {
     ]
   };
 
-  // Carreras y chefs cordobeses
   const carreras = [
     "Tecnicatura Universitaria en Gastronomía – Universidad Pública de Córdoba",
     "Licenciatura en Gastronomía – Universidad Siglo 21",
@@ -153,20 +151,18 @@ const Cocina = () => {
   ];
 
   const chefsCordobeses = [
-    { nombre: "Miguel Escalante", instagram: "@miguescalante", imagen: "/public/escalante.jpg" },
-    { nombre: "Lucas Galán", instagram: "@lucasgalan_chef", imagen: "/public/galan.jpg" },
-    { nombre: "Dante Enríquez", instagram: "@danteenriquez", imagen: "/public/enriquez.jpg" },
-    { nombre: "Darío Brugnon", instagram: "@dariobrugnon", imagen: "/public/brugnon.jpg" },
-    { nombre: "Julio Figueroa", instagram: "@juliofigueroachef", imagen: "/public/figueroa.jpg" }
+    { nombre: "Miguel Escalante", instagram: "@miguescalante", imagen: "/escalante.jpg" },
+    { nombre: "Lucas Galán", instagram: "@lucasgalan_chef", imagen: "/galan.jpg" },
+    { nombre: "Dante Enríquez", instagram: "@danteenriquez", imagen: "/enriquez.jpg" },
+    { nombre: "Darío Brugnon", instagram: "@dariobrugnon", imagen: "/brugnon.jpg" },
+    { nombre: "Julio Figueroa", instagram: "@juliofigueroachef", imagen: "/figueroa.jpg" }
   ];
 
-  // Initialize shuffled timeline
   useEffect(() => {
     const shuffled = [...timelineData].sort(() => Math.random() - 0.5);
     setTimelineOrder(shuffled);
   }, []);
 
-  // Check if timeline is complete
   useEffect(() => {
     if (timelineOrder.length === timelineData.length) {
       const isCorrect = timelineOrder.every((item, index) => item.id === timelineData[index].id);
@@ -366,15 +362,13 @@ const Cocina = () => {
                 key={i}
                 className="flex flex-col items-center bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 hover:scale-105 border-2 border-amber-200"
               >
-                {/* Círculo con Imagen (Innovadores) */}
                 <div className="w-28 h-28 bg-gray-200 rounded-full shadow-lg mb-4 overflow-hidden">
                   <img
-                    src={c.imagen} // Usa la URL de la imagen del chef
+                    src={c.imagen || "/placeholder.svg"}
                     alt={`Foto de ${c.nombre}`}
-                    className="w-full h-full object-cover" // Asegura que la imagen cubra el círculo
+                    className="w-full h-full object-cover"
                   />
                 </div>
-
                 <h3 className="font-bold text-xl text-gray-800 text-center mb-2">{c.nombre}</h3>
                 <p className="text-gray-600 text-center text-sm">{c.especialidad}</p>
               </div>
@@ -428,15 +422,13 @@ const Cocina = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {chefsCordobeses.map((chef, i) => (
                 <div key={i} className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition-all hover:scale-105">
-                  {/* **MODIFICACIÓN 2: Reemplazo del div de iniciales por la imagen** */}
                   <div className="w-20 h-20 bg-gray-200 rounded-full shadow-lg mx-auto mb-3 overflow-hidden">
                     <img
-                      src={chef.imagen} // Usa la URL de la imagen del chef cordobés
+                      src={chef.imagen || "/placeholder.svg"}
                       alt={`Foto de ${chef.nombre}`}
-                      className="w-full h-full object-cover" // Asegura que la imagen cubra el círculo
+                      className="w-full h-full object-cover"
                     />
                   </div>
-
                   <h4 className="font-bold text-gray-800 mb-2">{chef.nombre}</h4>
                   <a 
                     href={`https://instagram.com/${chef.instagram.replace('@', '')}`}
@@ -461,6 +453,4 @@ const Cocina = () => {
       </div>
     </div>
   );
-};
-
-export default Cocina;
+}
