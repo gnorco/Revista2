@@ -8,10 +8,10 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
       caption:
         "Organizados por intereses y creatividad, formamos los grupos y comenzamos a dar forma a nuestra propia edición de la revista PROA CIT.",
       images: [
-        "public/A1.jpg",
-        "public/AA1.jpg",
-        "public/AAAA1.jpg",
-        "public/AAAAA1.jpg",
+        "/A1.jpg",
+        "/AA1.jpg",
+        "/AAAA1.jpg",
+        "/AAAAA1.jpg",
       ],
     },
     {
@@ -19,14 +19,14 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
       title: "FOTOS B",
       caption:
         "Los grupos compartieron sus avances con la profesora, recibiendo consejos y correcciones para seguir mejorando cada propuesta de la revista.",
-      images: ["public/BB2.jpg", "public/BBB2.jpg", "public/BBBBB2.jpg"],
+      images: ["/BB2.jpg", "/BBB2.jpg", "/BBBBB2.jpg"],
     },
     {
       key: "C",
       title: "FOTOS C",
       caption:
         "Los grupos salieron a entrevistar y recopilar información, ampliando sus investigaciones para enriquecer los contenidos de la revista.",
-      images: ["public/CCC3.PNG", "public/CCCCC3.jpg"],
+      images: ["/CCC3.PNG", "/CCCCC3.jpg"],
     },
     {
       key: "D",
@@ -34,7 +34,7 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
       caption:
         "Luego de la presentación de la revista en Feria de Ciencias, junto a la profesora coordinamos las nuevas cosas que debíamos agregar a la revista.",
       images: [
-        "/public/IMG_8134.jpg",
+        "/IMG_8134.jpg",
       ],
     },
   ];
