@@ -132,6 +132,9 @@ const JuegosOlimpicos = () => {
   }
 
   let questionCounter = 0
+  const totalQuestions = triviaQuestions.reduce((acc, block) => acc + block.questions.length, 0)
+  const answeredCount = Object.keys(triviaAnswers).length
+  const allQuestionsAnswered = answeredCount === totalQuestions
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 py-16 w-full space-y-16 px-4 sm:px-6 lg:px-8 relative">
@@ -554,10 +557,21 @@ const JuegosOlimpicos = () => {
               ))}
 
               {!showResults ? (
-                <div className="flex justify-center">
+                <div className="flex flex-col items-center space-y-4">
+                  {!allQuestionsAnswered && (
+                    <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded text-center max-w-lg" role="alert">
+                      <p className="font-bold">¡Atención!</p>
+                      <p className="text-sm">Debes responder las {totalQuestions} preguntas (<span className="font-semibold">{answeredCount}/{totalQuestions}</span>) para ver los resultados.</p>
+                    </div>
+                  )}
                   <button
                     onClick={checkTrivia}
-                    className="text-white font-semibold px-8 py-4 rounded-lg bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg text-lg"
+                    disabled={!allQuestionsAnswered}
+                    className={`text-white font-semibold px-8 py-4 rounded-lg transition-all transform shadow-lg text-lg ${
+                      allQuestionsAnswered 
+                        ? "bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 hover:scale-105" 
+                        : "bg-gray-400 cursor-not-allowed opacity-70"
+                    }`}
                   >
                     Ver Resultados 📊
                   </button>
@@ -581,7 +595,7 @@ const JuegosOlimpicos = () => {
                         return false
                       }).length}
                     </span>{" "}
-                    de <span className="font-bold">{triviaQuestions.reduce((acc, block) => acc + block.questions.length, 0)}</span> preguntas.
+                    de <span className="font-bold">{totalQuestions}</span> preguntas.
                   </p>
                   <p className="text-sm text-gray-600 mt-2">¡Sigue aprendiendo sobre los Juegos Olímpicos! 🏅</p>
                 </div>
