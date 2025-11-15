@@ -474,7 +474,7 @@ const JuegosOlimpicos = () => {
         )}
       </div>
 
-      {/* Trivia Interactiva - Mantienen estilos originales */}
+      {/* Trivia Interactiva - Texto oscuro para visibilidad */}
       {allRingsFound && (
         <div className="space-y-4">
           <div className="flex justify-center">
@@ -488,12 +488,12 @@ const JuegosOlimpicos = () => {
 
           {showTrivia && (
             <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-8 border-2 border-purple-300 space-y-8">
-              <h2 className="text-3xl font-bold text-center text-purple-800">Trivia Interactiva</h2>
+              <h2 className="text-3xl font-bold text-center text-gray-900">Trivia Interactiva</h2> {/* Título principal oscuro */}
               
               {triviaQuestions.map((block, blockIndex) => (
                 <div key={blockIndex} className="space-y-6">
                   <div className="bg-white rounded-lg p-6 shadow-md">
-                    <h3 className="text-2xl font-semibold text-purple-700 mb-2">Bloque {blockIndex + 1} - {block.block}</h3>
+                    <h3 className="text-2xl font-semibold text-gray-800 mb-2">Bloque {blockIndex + 1} - {block.block}</h3> {/* Títulos de bloque oscuros */}
                     <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                       <p className="text-sm italic text-gray-700">💡 <strong>Tip:</strong> {block.tip}</p>
                     </div>
@@ -506,13 +506,14 @@ const JuegosOlimpicos = () => {
                     
                     return (
                       <div key={qIndex} className="bg-white rounded-lg p-6 shadow-md space-y-4">
-                        <h4 className="font-semibold text-lg text-gray-800">{question.q}</h4>
+                        <h4 className="font-semibold text-lg text-gray-800">{question.q}</h4> {/* Texto de la pregunta oscuro */}
                         <div className="space-y-2">
                           {question.options.map((option, optIndex) => {
                             const isSelected = userAnswer === optIndex.toString()
                             const isCorrectAnswer = optIndex === question.correct
                             
                             let bgColor = "bg-gray-50 hover:bg-gray-100"
+                            let textColor = "text-gray-700" // Aseguramos el color del texto de la opción
                             if (showResults) {
                               if (isCorrectAnswer) {
                                 bgColor = "bg-green-100 border-green-500"
@@ -528,7 +529,7 @@ const JuegosOlimpicos = () => {
                                 key={optIndex}
                                 onClick={() => !showResults && handleAnswerSelect(globalIndex, optIndex)}
                                 disabled={showResults}
-                                className={`w-full text-left p-4 rounded-lg border-2 transition-all ${bgColor} ${
+                                className={`w-full text-left p-4 rounded-lg border-2 transition-all ${bgColor} ${textColor} ${ // Aplicamos la clase de color de texto
                                   showResults ? "cursor-default" : "cursor-pointer"
                                 }`}
                               >
@@ -543,7 +544,7 @@ const JuegosOlimpicos = () => {
                         </div>
                         {showResults && question.extra && (
                           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mt-4">
-                            <p className="text-sm text-gray-700">{question.extra}</p>
+                            <p className="text-sm text-gray-700">{question.extra}</p> {/* Texto extra oscuro */}
                           </div>
                         )}
                       </div>
@@ -563,8 +564,8 @@ const JuegosOlimpicos = () => {
                 </div>
               ) : (
                 <div className="bg-white rounded-lg p-6 shadow-lg text-center">
-                  <h3 className="text-2xl font-bold text-purple-700 mb-4">Resultados</h3>
-                  <p className="text-lg">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Resultados</h3> {/* Título de resultados oscuro */}
+                  <p className="text-lg text-gray-800"> {/* Texto de resultados oscuro */}
                     Has respondido correctamente{" "}
                     <span className="font-bold text-green-600">
                       {Object.keys(triviaAnswers).filter((key) => {
