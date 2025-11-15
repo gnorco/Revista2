@@ -63,16 +63,10 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
   }
 
   return (
-    // CAMBIO AQUI:
-    // Se eliminó 'container mx-auto max-w-7xl' y 'overflow-x-hidden'.
-    // Ahora solo usa el padding y margin (px-4 my-8), asumiendo que el componente padre (App.jsx)
-    // maneja el ancho máximo y el centrado para todo el contenido de la página.
+
     <div className="px-4 my-8">
       <div className="text-center mb-12">
-        {/*
-          CAMBIO ANTERIOR:
-          Reemplazado 'text-dark' por 'text-black' para garantizar el color negro puro.
-        */}
+
         <h1 className="text-5xl font-bold text-black">Galería</h1>
       </div>
      
