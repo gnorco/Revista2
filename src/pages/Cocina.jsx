@@ -145,9 +145,9 @@
     };
 
     const carreras = [
-      "Tecnicatura Universitaria en Gastronomía – Universidad Pública de Córdoba",
-      "Licenciatura en Gastronomía – Universidad Siglo 21",
-      "Tecnicatura en Alta Cocina – IGA Córdoba"
+      "Tecnicatura Universitaria en Gastronomía – Universidad Pública de Córdoba.",
+      "Licenciatura en Gastronomía – Universidad Siglo 21.",
+      "Tecnicatura en Alta Cocina – IGA Córdoba."
     ];
 
     const chefsCordobeses = [
