@@ -209,11 +209,6 @@ export default function Valores() {
             </p>
             
             <div className="grid md:grid-cols-2 gap-6 max-w-xl mx-auto">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
-                <p className="text-sm text-gray-600 font-semibold mb-2">📍 Dirección</p>
-                <p className="text-gray-800 font-bold">Humberto Primo 467, 2° piso</p>
-              </div>
-              
               <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6">
                 <p className="text-sm text-gray-600 font-semibold mb-2">📞 Teléfono</p>
                 <p className="text-gray-800 font-bold">0351 - 4331985 / 4342718</p>

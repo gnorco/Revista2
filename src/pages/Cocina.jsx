@@ -314,7 +314,7 @@
                     <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden">
                       <button
                         onClick={() => setExpandedRecipe(expandedRecipe === index ? null : index)}
-                        className="w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition-colors"
+                        className="w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition-colors bg-white"
                       >
                         <span className="font-bold text-lg text-gray-800">{receta.nombre}</span>
                         <span className="text-2xl transform transition-transform duration-300" style={{

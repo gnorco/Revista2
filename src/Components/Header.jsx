@@ -55,6 +55,13 @@ export default function Header() {
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#7b91fe] to-[#41599f] group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
+              to="/programacion"
+              className="relative px-5 py-2.5 text-gray-700 hover:text-[#15274b] font-semibold transition-all duration-300 rounded-lg hover:bg-white/60 group"
+            >
+              Programación
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#7b91fe] to-[#41599f] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+            <Link
               to="/entrevistas"
               className="relative px-5 py-2.5 text-gray-700 hover:text-[#15274b] font-semibold transition-all duration-300 rounded-lg hover:bg-white/60 group"
             >
@@ -133,6 +140,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Videojuegos
+              </Link>
+              <Link
+                to="/programacion"
+                className="px-4 py-3 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#7b91fe] hover:to-[#41599f] font-semibold transition-all duration-300 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Programación
               </Link>
               <Link
                 to="/entrevistas"

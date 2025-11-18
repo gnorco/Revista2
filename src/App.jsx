@@ -19,6 +19,7 @@ import SobreLaRevista from "./pages/SobreLaRevista"
 import Galeria from "./pages/Galeria"
 import Entrevista from "./pages/Entrevista"
 import Valores from "./pages/Valores"
+import Programacion from "./pages/Programacion"
 
 function AppContent() {
   const location = useLocation()
@@ -82,6 +83,7 @@ function AppContent() {
                 <Route path="/galeria" element={<Galeria />} />
                 <Route path="/entrevistas" element={<Entrevista />} />
                 <Route path="/valores" element={<Valores />} />
+                <Route path="/programacion" element={<Programacion />} />
               </Routes>
             </motion.div>
           </AnimatePresence>

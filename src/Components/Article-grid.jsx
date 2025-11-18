@@ -21,7 +21,7 @@ export default function ArticleGrid() {
       title: "Entrevistas",
       excerpt: "Exploramos entrevistas exclusivas con expertos, innovadores y referentes de distintos campos, donde comparten sus experiencias, conocimientos y consejos.",
       image: "/banner_entrevistas.jpg",
-      link: "/Entrevista",
+      link: "/entrevistas",
       color: "from-purple-500 to-pink-500",
       icon: "🎤",
     },
