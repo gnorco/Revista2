@@ -62,8 +62,8 @@ export default function GalleryBootstrapReact({ galleriesProp }) {
     setModalCaption("");
   }
 
-  return (
-
+  return ( 
+  
     <div className="px-4 my-8">
       <div className="text-center mb-12">
 
