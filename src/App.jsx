@@ -1,20 +1,24 @@
-"use client"
+'use client'
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import Header from "./Components/Header"
-import HeroArticle from "./Components/Hero-article"
-import ArticleGrid from "./Components/Article-grid"
-import Sidebar from "./Components/Sidebar"
-import Footer from "./Components/Footer"
-import ScrollToTopButton from "./Components/ScrollToTopButton"
 
+// Components
+import Header from "./components/Header"
+import HeroArticle from "./components/Hero-article"
+import ArticleGrid from "./components/Article-grid"
+import Sidebar from "./components/Sidebar"
+import Footer from "./components/Footer"
+import ScrollToTopButton from "./components/ScrollToTopButton"
+
+// Pages
 import JuegosOlimpicos from "./pages/JuegosOlimpicos"
 import Cocina from "./pages/Cocina"
 import Videojuegos from "./pages/Videojuegos"
 import SobreLaRevista from "./pages/SobreLaRevista"
 import Galeria from "./pages/Galeria"
 import Entrevista from "./pages/Entrevista"
+import Valores from "./pages/Valores"
 
 function AppContent() {
   const location = useLocation()
@@ -77,6 +81,7 @@ function AppContent() {
                 <Route path="/videojuegos" element={<Videojuegos />} />
                 <Route path="/galeria" element={<Galeria />} />
                 <Route path="/entrevistas" element={<Entrevista />} />
+                <Route path="/valores" element={<Valores />} />
               </Routes>
             </motion.div>
           </AnimatePresence>
